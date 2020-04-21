@@ -1,0 +1,73 @@
+version: '3'
+
+######### Services ###################################
+
+services:
+  # Server container
+  nginx:
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+
+    volumes:
+      - ./:/var/www:consistent
+      - ./docker/nginx/logs:/var/log/nginx:cached
+    ports:
+      # Nuxt port
+      - 80:80
+      # Laravel port
+      - 8081:81
+    links:
+      - node
+      - php
+
+  # PHP FastCGI Process Manager container
+  php:
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+      - api/.env
+    volumes:
+      - ./api:/var/www/api:consistent
+    environment:
+      # If you down want to use xDebug, set remote_enable=0
+      XDEBUG_CONFIG: "remote_enable=1"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    links:
+      - mysql
+      - mailhog
+
+  # Node container
+  node:
+    build:
+      context: docker/node
+      dockerfile: Dockerfile
+    volumes:
+      - ./nuxt:/var/www/client:cached
+
+
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - .env
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: root
+    user: 1000:1000
+    volumes:
+      - ./data/mysql:/var/lib/mysql:cached
+
+
+  # Mailhog container (SMTP testing)
+  mailhog:
+    build:
+      context: docker/mailhog
+      dockerfile: Dockerfile
+    ports:
+      - 8026:8025

@@ -1,0 +1,16 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    "A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations."
+    dummyMutation: String
+}
+
+type Query {
+    "A placeholder query used by thecodingmachine/graphqlite when there are no declared queries."
+    dummyQuery: String
+}
