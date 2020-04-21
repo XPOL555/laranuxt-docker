@@ -2,6 +2,10 @@
 
 This project is a dockerized version of [Nuxt 2](https://nuxtjs.org/guide) and [Laravel 6](https://laravel.com/docs/6.x/installation)
 
+## Requirements
+1. Docker
+1. Base Knowledge of Laravel, Docker and Nuxt
+
 ## Getting started
 
 1.  Copy [laravel's configuration file](https://laravel.com/docs/6.x/configuration) `api/.env.local` into`api/.env` 
