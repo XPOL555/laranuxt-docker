@@ -6,7 +6,7 @@ This project is a dockerized version of [Nuxt 2](https://nuxtjs.org/guide) and [
 
 1.  Copy [laravel's configuration file](https://laravel.com/docs/6.x/configuration) `api/.env.local` into`api/.env` 
 1.  Copy `nuxt/.env.local` into`nuxt/.env` 
-1.  Run `docker-composer up` or start ![image](uploads/723be85325c497c10e0c3ec8ecc668ec/image.png) `services` from the `docker-compose.yml` file (this may take up to 5 minutes for the first time)
+1.  Run `docker-composer up` or start `services` from the `docker-compose.yml` file (this may take up to 5 minutes for the first time)
 1.  Run `docker-compose exec php composer install`
 1.  Run `docker-compose exec php artisan migrate --seed` (change `ADMIN_EMAIL`, `ADMIN_PASSWORD` and `ADMIN_USER` in `app/.env` if you like)
 1.  Run `docker-compose exec php bash -c "php artisan migrate --seed"` to init the laravel db and seeding the admin user
